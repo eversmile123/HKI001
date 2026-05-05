@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+@layer base {
+  @media print {
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    
+    html, body, #root {
+      height: auto !important;
+      overflow: visible !important;
+      background: white !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    
+    /* Force main layout to release viewport constraints */
+    .h-screen, .min-h-screen {
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    .flex, .md\:flex {
+      display: block !important;
+    }
+
+    .flex-1 {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: none !important;
+    }
+
+    #root {
+      padding: 0 !important;
+      margin: 0 !important;
+      display: block !important;
+    }
+
+    .print-only {
+      display: block !important;
+    }
+    
+    .no-print, .print\:hidden {
+      display: none !important;
+    }
+
+    /* Force new page for specific elements */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+      padding-top: 2rem;
+    }
+
+    /* Avoid breaking inside cards or images */
+    .break-inside-avoid {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    /* Ensure backgrounds show up */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+}
+
+/* Strategic PDF & Print Optimization Suite
+   Ensures professional aesthetics and compatibility with static engines like html-to-image/jspdf.
+   Explicitly overrides oklch/oklab values with stable hex equivalents. */
+
+.quill-wrapper .ql-toolbar.ql-snow {
+  border: none !important;
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 8px !important;
+}
+
+.quill-wrapper .ql-container.ql-snow {
+  border: none !important;
+  height: 150px !important;
+  font-family: inherit !important;
+  font-size: 0.75rem !important;
+}
+
+.quill-wrapper .ql-editor {
+  padding: 12px !important;
+}
+
+.quill-wrapper .ql-editor.ql-blank::before {
+  font-style: normal !important;
+  color: #94a3b8 !important;
+  left: 12px !important;
+}
+
+#summary-content, #report-content, .pdf-export-mode, @media print {
+  /* System-wide Color Stability Overrides */
+  --slate-50: #f8fafc !important; --color-slate-50: #f8fafc !important;
+  --slate-100: #f1f5f9 !important; --color-slate-100: #f1f5f9 !important;
+  --slate-200: #e2e8f0 !important; --color-slate-200: #e2e8f0 !important;
+  --slate-300: #cbd5e1 !important; --color-slate-300: #cbd5e1 !important;
+  --slate-400: #94a3b8 !important; --color-slate-400: #94a3b8 !important;
+  --slate-500: #64748b !important; --color-slate-500: #64748b !important;
+  --slate-600: #475569 !important; --color-slate-600: #475569 !important;
+  --slate-700: #334155 !important; --color-slate-700: #334155 !important;
+  --slate-800: #1e293b !important; --color-slate-800: #1e293b !important;
+  --slate-900: #0f172a !important; --color-slate-900: #0f172a !important;
+  
+  --blue-50: #eff6ff !important; --color-blue-50: #eff6ff !important;
+  --blue-500: #3b82f6 !important; --color-blue-500: #3b82f6 !important;
+  --blue-600: #2563eb !important; --color-blue-600: #2563eb !important;
+  
+  --emerald-50: #ecfdf5 !important; --color-emerald-50: #ecfdf5 !important;
+  --emerald-500: #10b981 !important; --color-emerald-500: #10b981 !important;
+  
+  --amber-50: #fffbeb !important; --color-amber-50: #fffbeb !important;
+  --amber-500: #f59e0b !important; --color-amber-500: #f59e0b !important;
+  
+  --rose-50: #fff1f2 !important; --color-rose-50: #fff1f2 !important;
+  --rose-500: #f43f5e !important; --color-rose-500: #f43f5e !important;
+  
+  --white: #ffffff !important; --color-white: #ffffff !important;
+  --black: #000000 !important; --color-black: #000000 !important;
+
+  /* Force absolute colors for borders and text */
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+
+  /* Neutralize engine-breaking shadows and filters */
+  box-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-ring-color: transparent !important;
+  
+  /* Disable transitions during export for stability */
+  transition: none !important;
+  animation: none !important;
+}
+
+
+.pdf-export-mode * {
+  /* Prevent any nested elements from using unsupported color spaces for shadows/filters */
+  filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  --tw-ring-color: transparent !important;
+  --tw-ring-shadow: none !important;
+  --tw-ring-offset-shadow: none !important;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 10mm;
+  }
+  
+  body {
+    background: white !important;
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  /* Professional report formatting */
+  .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+
+  /* Force single column on smaller sections */
+  .grid-cols-1, .md\:grid-cols-4 { grid-template-columns: 1fr !important; }
+  
+  #summary-content, #report-content {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .bg-white {
+    page-break-inside: avoid !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+  }
+
+  /* Specific styling for Audit Entry detail printing */
+  #audit-registry-entry {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    z-index: 9999 !important;
+    background: white !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  #audit-registry-entry .grid {
+    gap: 1rem !important;
+  }
+
+  /* Hide the rest of the app when printing details */
+  body:has(#audit-registry-entry) > *:not(:has(#audit-registry-entry)) {
+    display: none !important;
+  }
+
+  h1, h2, h3, h4, h5 {
+    color: #0f172a !important;
+    page-break-after: avoid;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+  }
+
+  .print\:hidden, button, .no-print {
+    display: none !important;
+  }
+
+  .recharts-responsive-container {
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+  img, svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+@keyframes glow-rose {
+  0%, 100% { box-shadow: 0 0 5px rgba(244, 63, 94, 0.2), 0 0 10px rgba(244, 63, 94, 0.1); border-color: rgba(244, 63, 94, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(244, 63, 94, 0.4), 0 0 20px rgba(244, 63, 94, 0.2); border-color: rgba(244, 63, 94, 0.6); }
+}
+
+@keyframes glow-amber {
+  0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.2), 0 0 10px rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4), 0 0 20px rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.6); }
+}
+
+.animate-glow-rose {
+  animation: glow-rose 3s infinite ease-in-out;
+}
+
+.animate-glow-amber {
+  animation: glow-amber 3s infinite ease-in-out;
+}
+
+@keyframes glow-emerald {
+  0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.1), 0 0 10px rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 12px rgba(16, 185, 129, 0.2), 0 0 15px rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.4); }
+}
+
+.animate-glow-emerald {
+  animation: glow-emerald 4s infinite ease-in-out;
+}
